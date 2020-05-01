@@ -7,7 +7,9 @@ let turn;     // 1 or -1 (player)
 let winner;   // 1 = Player 1; -1 = Player 2; 'T' = tie; null = no winner/tie
 
 /*----- cached element references -----*/
-
+const markerEls = Array.from(document.querySelectorAll('#markers > div'));
+// OR
+// const markerEls = [...document.querySelectorAll('#markers > div')];
 
 /*----- event listeners -----*/
 document.getElementById('markers')
@@ -36,6 +38,9 @@ function render() {
 }
 
 function handleClick(evt) {
-  console.log(evt.target);
+  // Get col index of clicked marker
+  const colIdx = markerEls.indexOf(evt.target);
+  // Ensure actual col marker was clicked
+  if (colIdx === -1) return;
 
 }
