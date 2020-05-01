@@ -25,7 +25,7 @@ body {
   border-left: 5vmin solid transparent;
   border-right: 5vmin solid transparent;
   margin-top: 4vmin;
-  transform: scale(0.7);
+  transform: scale(.7);
 }
 
 #markers div:hover {
