@@ -1,5 +1,9 @@
 /*----- constants -----*/
-
+const playerLookup = {
+  '1': 'purple',
+  '-1': 'lime',
+  'null': 'transparent' 
+};
 
 /*----- app's state (variables) -----*/
 let board;    // Array of column arrays with 1, -1, or null
@@ -20,9 +24,9 @@ init();
 
 function init() {
   board = [
-    [1, null, null, null, null, null],  // Column 0
-    [-1, 1, null, null, null, null],  // Column 1
-    [null, null, -1, null, null, null],  // etc.
+    [null, null, null, null, null, null],  // Column 0
+    [null, null, null, null, null, null],  // Column 1
+    [null, null, null, null, null, null],  // etc.
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -33,12 +37,13 @@ function init() {
   render();
 }
 
+// Transfer ALL state to the DOM
 function render() {
   // Render the board
   board.forEach(function(colArr, colIdx) {
     colArr.forEach(function(cell, rowIdx) {
       const div = document.getElementById(`c${colIdx}r${rowIdx}`);
-      console.log(div)
+      div.style.backgroundColor = playerLookup[cell];
     });
   });
 }
