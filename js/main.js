@@ -40,20 +40,29 @@ function init() {
 
 // Transfer ALL state to the DOM
 function render() {
-  // Render the board
-  board.forEach(function(colArr, colIdx) {
-    colArr.forEach(function(cell, rowIdx) {
-      const div = document.getElementById(`c${colIdx}r${rowIdx}`);
-      div.style.backgroundColor = playerLookup[cell];
-    });
-  });
+  renderBoard();
   // Render turn or winner message
   if (winner) {
-
+    if (winner === 'T') {
+      msgEl.innerHTML = "It's a Tie!";
+    } else {
+      msgEl.innerHTML = `<span style="color: ${playerLookup[winner]}">${playerLookup[winner].toUpperCase()}</span> Wins!`;
+    }
   } else {
     // Render whose turn
     msgEl.innerHTML = `<span style="color: ${playerLookup[turn]}">${playerLookup[turn].toUpperCase()}'s</span> Turn`;
   }
+}
+
+function renderBoard() {
+  // Render the board
+  board.forEach(function(colArr, colIdx) {
+    colArr.forEach(function(cell, rowIdx) {
+      if (!colArr.includes(null)) markerEls[colIdx].style.visibility = 'hidden';
+      const div = document.getElementById(`c${colIdx}r${rowIdx}`);
+      div.style.backgroundColor = playerLookup[cell];
+    });
+  });
 }
 
 function handleClick(evt) {
@@ -67,8 +76,34 @@ function handleClick(evt) {
   if (rowIdx === -1) return;
   // Update the board's column
   colArr[rowIdx] = turn;
-
+  // Calculate winner
+  getWinner();
   turn *= -1;
   // turn = turn * -1;
   render();
+}
+
+function getWinner() {
+  // Iterate through all col arrays until a winner
+  for (let colIdx = 0; colIdx < board.length; colIdx++) {
+    checkCol(colIdx);
+    if (winner) break;
+  }
+}
+
+function checkCol(colIdx) {
+  const colArr = board[colIdx];
+  for (let rowIdx = 0; rowIdx < colArr.length; rowIdx++) {
+    if (colArr[rowIdx] === null) break;
+    if (rowIdx <= 2) winner = checkUp(colArr, rowIdx);
+    if (winner) break;
+  }
+}
+
+function checkUp(colArr, rowIdx) {
+  if (Math.abs(colArr[rowIdx] + colArr[rowIdx + 1] + colArr[rowIdx + 2] + colArr[rowIdx + 3]) === 4) {
+    return colArr[rowIdx];
+  } else {
+    return null;
+  }
 }
