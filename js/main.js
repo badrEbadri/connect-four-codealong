@@ -59,7 +59,16 @@ function render() {
 function handleClick(evt) {
   // Get col index of clicked marker
   const colIdx = markerEls.indexOf(evt.target);
-  // Ensure actual col marker was clicked
-  if (colIdx === -1) return;
+  // Ensure actual col marker was clicked and that the game isn't over
+  if (colIdx === -1 || winner) return;
+  // Get index of first null in col array
+  const colArr = board[colIdx];
+  const rowIdx = colArr.indexOf(null);
+  if (rowIdx === -1) return;
+  // Update the board's column
+  colArr[rowIdx] = turn;
 
+  turn *= -1;
+  // turn = turn * -1;
+  render();
 }
