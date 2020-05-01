@@ -15,7 +15,7 @@ body {
 #markers {
   display: grid;
   grid-template-columns: repeat(7, 10vmin);
-  grid-gap: 1vmin;
+  gap: 1vmin;
   margin-bottom: 1vmin;
 }
 
