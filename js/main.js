@@ -10,7 +10,8 @@ let winner;   // 1 = Player 1; -1 = Player 2; 'T' = tie; null = no winner/tie
 
 
 /*----- event listeners -----*/
-
+document.getElementById('markers')
+  .addEventListener('click', handleClick);
 
 /*----- functions -----*/
 init();
@@ -25,4 +26,16 @@ function init() {
     [null, null, null, null, null, null],
     [null, null, null, null, null, null]
   ];
+  turn = 1;
+  winner = null;
+  render();
+}
+
+function render() {
+
+}
+
+function handleClick(evt) {
+  console.log(evt.target);
+
 }
