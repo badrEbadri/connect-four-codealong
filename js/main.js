@@ -20,9 +20,9 @@ init();
 
 function init() {
   board = [
-    [null, null, null, null, null, null],  // Column 0
-    [null, null, null, null, null, null],  // Column 1
-    [null, null, null, null, null, null],  // etc.
+    [1, null, null, null, null, null],  // Column 0
+    [-1, 1, null, null, null, null],  // Column 1
+    [null, null, -1, null, null, null],  // etc.
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
     [null, null, null, null, null, null],
@@ -34,7 +34,13 @@ function init() {
 }
 
 function render() {
-
+  // Render the board
+  board.forEach(function(colArr, colIdx) {
+    colArr.forEach(function(cell, rowIdx) {
+      const div = document.getElementById(`c${colIdx}r${rowIdx}`);
+      console.log(div)
+    });
+  });
 }
 
 function handleClick(evt) {
