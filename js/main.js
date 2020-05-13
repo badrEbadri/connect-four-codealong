@@ -1,7 +1,7 @@
 /*----- constants -----*/
 const playerLookup = {
   '1': 'purple',
-  '-1': 'lime',
+  '-1': 'orange',
   'null': 'transparent' 
 };
 
